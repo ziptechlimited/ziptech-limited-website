@@ -23,9 +23,9 @@ const Hero = () => {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
   // Words for stagger animation
-  const title1 = "WE ENGINEER";
-  const title2 = "DIGITAL";
-  const title3 = "EXCELLENCE";
+  const title1 = "TECHNOLOGY";
+  const title2 = "VENTURES";
+  const title3 = "GROWTH";
 
   const containerVariants = {
     hidden: { opacity: 0 },

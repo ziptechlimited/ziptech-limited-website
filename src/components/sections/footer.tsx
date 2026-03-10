@@ -19,12 +19,12 @@ const Footer = () => {
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
-      // GMT+2 calculation
+      // GMT+1 calculation (West Africa Time - WAT)
       const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-      const gmtPlus2 = new Date(utc + (3600000 * 2));
-      const hours = gmtPlus2.getHours().toString().padStart(2, '0');
-      const minutes = gmtPlus2.getMinutes().toString().padStart(2, '0');
-      const seconds = gmtPlus2.getSeconds().toString().padStart(2, '0');
+      const gmtPlus1 = new Date(utc + (3600000 * 1));
+      const hours = gmtPlus1.getHours().toString().padStart(2, '0');
+      const minutes = gmtPlus1.getMinutes().toString().padStart(2, '0');
+      const seconds = gmtPlus1.getSeconds().toString().padStart(2, '0');
       setTime(`${hours}:${minutes}:${seconds}`);
     };
 
@@ -150,7 +150,7 @@ const Footer = () => {
               className="text-2xl font-light tracking-wide flex items-center gap-3"
             >
               <span className="tabular-nums">{time}</span> 
-              <span className="text-sm text-[#808080]">GMT+2</span>
+              <span className="text-sm text-[#808080]">WAT</span>
             </motion.div>
           </div>
 

@@ -56,8 +56,8 @@ export const projectsData: ProjectData[] = [
     solution: "We developed a serene, nature-inspired visual language paired with a highly structured product catalog. Cinematic scroll sequences highlight the materials' lifecycle, while a persistent, frictionless cart system ensures ease of use.",
     impact: "Secured 3 major enterprise contracts within the first month of launch.",
     detailImages: [
-      "https://images.unsplash.com/photo-1605608027727-4a1622f98126?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1542744094-24638ea0b46c?q=80&w=2070&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop"
     ],
     nextProjectSlug: "helpguide",
     nextProjectTitle: "Helpguide",

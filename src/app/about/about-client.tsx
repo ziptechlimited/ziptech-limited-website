@@ -72,7 +72,7 @@ export default function AboutClient() {
             </span>
           </h1>
           <p className="max-w-2xl mx-auto text-lg md:text-xl text-[#111]/60 font-light leading-relaxed mt-12">
-            Antigravity is a boutique digital studio where design meets cinematic storytelling and high-precision engineering.
+            Ziptech is a multidisciplinary technology solutions company dedicated to building innovative digital products, empowering businesses, and supporting emerging entrepreneurs.
           </p>
         </div>
       </section>
@@ -84,11 +84,11 @@ export default function AboutClient() {
           className="max-w-[1200px] text-center px-[5vw] z-10"
         >
           <h2 className="text-[clamp(2.5rem,6vw,5rem)] leading-none font-medium uppercase tracking-tighter mb-12">
-            Our vision is to defy <br /> 
-            <span className="text-[#00ffff]">the standard digital gravity.</span>
+            To become a leading African <br /> 
+            <span className="text-[#00ffff]">technology & venture-building company.</span>
           </h2>
           <p className="text-xl md:text-2xl font-light text-white/50 leading-relaxed max-w-3xl mx-auto">
-            We don't just build websites; we craft immersive journeys that linger in the mind long after the tab is closed.
+            We enable innovative businesses, empower digital talent, and drive sustainable technological growth across the continent.
           </p>
         </motion.div>
         
@@ -121,10 +121,10 @@ export default function AboutClient() {
               </h3>
               <div className="space-y-8 text-xl text-[#111]/70 font-light leading-relaxed">
                 <p>
-                  Founded by a group of designers and engineers who grew tired of the "cookie-cutter" web, Antigravity was built to prove that functional can also be beautiful.
+                  Founded in Nigeria, Ziptech operates at the intersection of technology, business development, digital growth, and venture incubation. We provide end-to-end support for startups, businesses, and organizations looking to leverage technology to scale their operations and reach.
                 </p>
                 <p>
-                  We treat every project as a piece of art, ensuring that the technology is invisible while the experience remains unforgettable.
+                  Beyond traditional technology services, Ziptech is structured as a venture-building organization, partnering with founders and innovators to transform early-stage ideas into functional products and scalable ventures.
                 </p>
               </div>
             </FadeUp>
@@ -148,11 +148,13 @@ export default function AboutClient() {
             </FadeUp>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { title: "Subtract", text: "Removing everything unnecessary until only the core essence remains. Simplicity is the ultimate sophistication." },
-              { title: "Elevate", text: "Pushing standard components beyond their limits with custom motion and cinematic transitions." },
-              { title: "Connect", text: "Designing for human emotion first. We create digital interfaces that breathe and respond." }
+              { title: "Innovation", text: "We embrace creativity and forward-thinking solutions to solve real-world problems through technology." },
+              { title: "Integrity", text: "We maintain transparency, honesty, and accountability in all our professional relationships." },
+              { title: "Excellence", text: "We strive for quality in everything we build, ensuring our products and services meet global standards." },
+              { title: "Collaboration", text: "We believe great innovation happens through teamwork, partnerships, and shared knowledge." },
+              { title: "Growth", text: "We are committed to continuous learning, improvement, and the development of businesses, founders, and talent." }
             ].map((item, i) => (
               <FadeUp key={item.title} delay={i * 0.1}>
                 <div className="aspect-3/4 bg-zinc-900 border border-white/10 p-6 flex flex-col justify-end relative overflow-hidden group">

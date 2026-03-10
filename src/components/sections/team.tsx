@@ -7,9 +7,9 @@ import { FaLinkedinIn, FaTwitter, FaGithub } from 'react-icons/fa';
 const teamMembers = [
   {
     name: "David Obinna",
-    role: "Founder & Creative Director",
-    bio: "Ex-agency design lead with a passion for digital experiences that blur the line between art and utility.",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1287&auto=format&fit=crop",
+    role: "Chief Executive Officer",
+    bio: "A seasoned software engineer with 5+ years of experience leading technical teams and driving product vision.",
+    image: "/David.jpeg",
     socials: [
       { name: "LinkedIn", icon: <FaLinkedinIn className="w-4 h-4" /> },
       { name: "Twitter", icon: <FaTwitter className="w-4 h-4" /> },
@@ -17,10 +17,10 @@ const teamMembers = [
     ]
   },
   {
-    name: "Samuel Okon",
+    name: "Samyy Swift",
     role: "Chief Technology Officer",
-    bio: "Obsessed with performance and fluid motion. If it animates, he built it.",
-    image: "/samuel.jpg",
+    bio: "An AI engineer with over 4 years of experience specializing in intelligent automated systems.",
+    image: "/samuel.JPG",
     socials: [
       { name: "LinkedIn", icon: <FaLinkedinIn className="w-4 h-4" /> },
       { name: "Twitter", icon: <FaTwitter className="w-4 h-4" /> },
@@ -28,10 +28,10 @@ const teamMembers = [
     ]
   },
   {
-    name: "Gideon Akani",
-    role: "Lead 3D Artist",
-    bio: "Crafting immersive 3D worlds and spatial interfaces for the next generation of the web.",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1287&auto=format&fit=crop",
+    name: "TBD",
+    role: "Lead Cyber Security",
+    bio: "Securing modern infrastructure and ensuring absolute integrity of our digital platforms.",
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1287&auto=format&fit=crop", // generic cyber sec image
     socials: [
       { name: "LinkedIn", icon: <FaLinkedinIn className="w-4 h-4" /> },
       { name: "Twitter", icon: <FaTwitter className="w-4 h-4" /> },

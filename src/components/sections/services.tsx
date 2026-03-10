@@ -5,52 +5,52 @@ import { Smartphone, MonitorSmartphone, PenTool, Rocket, Globe, ShoppingCart, La
 const chapters = [
   {
     num: "01",
-    title: "App Development",
+    title: "Technology Solutions",
     items: [
-      { id: "1.1", title: "NATIVE iOS & ANDROID", description: "High-performance applications built specifically for their target platforms.", icon: Smartphone },
-      { id: "1.2", title: "CROSS-PLATFORM", description: "Efficient React Native & Flutter solutions that share a single codebase.", icon: MonitorSmartphone },
-      { id: "1.3", title: "UI/UX PROTOTYPING", description: "Interactive wireframes and user flow mapping before writing a line of code.", icon: PenTool },
-      { id: "1.4", title: "APP STORE DEPLOYMENT", description: "Navigating compliance, testing, and full lifecycle release management.", icon: Rocket }
+      { id: "1.1", title: "CUSTOM SOFTWARE", description: "Bespoke technology solutions that digitize operations and improve efficiency.", icon: MonitorSmartphone },
+      { id: "1.2", title: "WEB APPS", description: "Scalable SPAs and server-rendered applications using modern frameworks.", icon: Globe },
+      { id: "1.3", title: "MOBILE APPS", description: "High-performance applications built specifically for global platforms.", icon: Smartphone },
+      { id: "1.4", title: "API INTEGRATIONS", description: "Connecting systems and organizing product architecture for seamless data flow.", icon: Database }
     ]
   },
   {
     num: "02",
-    title: "Website Development",
+    title: "Digital Growth",
     items: [
-      { id: "2.1", title: "MODERN WEB APPS", description: "Scalable SPAs and server-rendered applications using Next.js & React.", icon: Globe },
-      { id: "2.2", title: "E-COMMERCE", description: "High-conversion storefronts utilizing Shopify, Stripe, and headless commerce.", icon: ShoppingCart },
-      { id: "2.3", title: "CUSTOM CMS", description: "Tailored content management systems for ultimate editorial control.", icon: LayoutTemplate },
-      { id: "2.4", title: "WEB ANIMATIONS", description: "Award-winning WebGL, Three.js, and Framer Motion immersive digital experiences.", icon: Sparkles }
+      { id: "2.1", title: "SOCIAL MEDIA", description: "Strategic social media management and proactive digital marketing.", icon: MessageSquare },
+      { id: "2.2", title: "CONTENT CREATION", description: "Brand positioning through compelling storytelling and content development.", icon: PenTool },
+      { id: "2.3", title: "DIGITAL CAMPAIGNS", description: "Targeted strategies designed to expand audience reach and engagement.", icon: Sparkles },
+      { id: "2.4", title: "ANALYTICS", description: "Data-driven insights and forecasting to optimize digital footprints.", icon: LineChart }
     ]
   },
   {
     num: "03",
-    title: "AI Integration",
+    title: "Business Development",
     items: [
-      { id: "3.1", title: "LLM INTEGRATION", description: "Embedding massive language capabilities directly into your existing software.", icon: BrainCircuit },
-      { id: "3.2", title: "RAG SYSTEMS", description: "Retrieval-Augmented Generation that allows AI to converse with your proprietary data privately.", icon: Database },
-      { id: "3.3", title: "AI AGENTS", description: "Autonomous digital workers capable of multi-step reasoning and API execution.", icon: Cpu },
-      { id: "3.4", title: "COMPUTER VISION", description: "Real-time image analysis, object detection, and visual processing pipelines.", icon: Eye }
+      { id: "3.1", title: "STRATEGIC ADVISORY", description: "Guidance for startups and organizations to ensure sustainable business growth.", icon: BrainCircuit },
+      { id: "3.2", title: "BUSINESS MODELS", description: "Developing resilient revenue architectures and operational structures.", icon: LayoutTemplate },
+      { id: "3.3", title: "MARKET RESEARCH", description: "In-depth product-market fit analysis and competitive landscape evaluation.", icon: Network },
+      { id: "3.4", title: "PITCH DECKS", description: "Preparation of investor-ready materials and comprehensive growth strategies.", icon: Cpu }
     ]
   },
   {
     num: "04",
-    title: "AI Automation",
+    title: "Venture Incubation",
     items: [
-      { id: "4.1", title: "WORKFLOW AUTOMATION", description: "Replacing tedious manual processes with intelligent, self-healing automated logic.", icon: GitMerge },
-      { id: "4.2", title: "CUSTOMER SUPPORT", description: "Tier-1 intelligent routing and instant-response conversational AI chatbots.", icon: MessageSquare },
-      { id: "4.3", title: "DATA EXTRACTION", description: "Unstructured data parsing, web scraping, and automated database population.", icon: Database },
-      { id: "4.4", title: "PREDICTIVE ANALYTICS", description: "Machine learning models designed to forecast trends from historical business data.", icon: LineChart }
+      { id: "4.1", title: "MENTORSHIP", description: "Ziptech Labs offers dedicated support for early-stage founders.", icon: ShieldCheck },
+      { id: "4.2", title: "PRODUCT DEVELOPMENT", description: "Technical architecture and guidance from concept to launch.", icon: GitMerge },
+      { id: "4.3", title: "TALENT SOURCING", description: "Connecting startups with top-tier personnel and accountability frameworks.", icon: Eye },
+      { id: "4.4", title: "EQUITY COLLABORATION", description: "Strategic partnerships and investments with select high-potential startups.", icon: Rocket }
     ]
   },
   {
     num: "05",
-    title: "Cloud Architecture",
+    title: "Tech Education",
     items: [
-      { id: "5.1", title: "SERVERLESS", description: "Infinitely scalable Lambda and Edge Function infrastructures with zero maintenance.", icon: Network },
-      { id: "5.2", title: "DATABASE DESIGN", description: "Robust relational (PostgreSQL) and flexible NoSQL (MongoDB/Redis) data architecture.", icon: Server },
-      { id: "5.3", title: "CI/CD PIPELINES", description: "Automated testing and zero-downtime continuous deployment workflows.", icon: ShieldCheck },
-      { id: "5.4", title: "INFRASTRUCTURE AS CODE", description: "Terraform and Docker containerization ensuring identical development and production environments.", icon: Container }
+      { id: "5.1", title: "WORKSHOPS", description: "Future Ziptech Academy initiatives designed to build core practical skills.", icon: Container },
+      { id: "5.2", title: "TRAINING PROGRAMS", description: "Comprehensive courses addressing the technical demands of the modern workplace.", icon: Cloud },
+      { id: "5.3", title: "INTERNSHIPS", description: "Hands-on experience providing exposure to real-world technological challenges.", icon: Cpu },
+      { id: "5.4", title: "MENTORSHIP", description: "Direct guidance for aspiring technology professionals by seasoned experts.", icon: Server }
     ]
   }
 ];

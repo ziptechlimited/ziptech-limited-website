@@ -73,7 +73,7 @@ const ExperienceIntro: React.FC<ExperienceIntroProps> = () => {
       top: "12%", left: "8%", width: 320, height: 480, rotation: -5, parallax: 40,
     },
     {
-      url: "https://images.unsplash.com/photo-1605608027727-4a1622f98126?q=80&w=600&auto=format&fit=crop",
+      url: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=600&auto=format&fit=crop", // Computer desk
       top: "18%", left: "72%", width: 340, height: 460, rotation: 3, parallax: 60,
     },
     {
@@ -85,7 +85,7 @@ const ExperienceIntro: React.FC<ExperienceIntroProps> = () => {
       top: "32%", left: "84%", width: 360, height: 520, rotation: -2, parallax: 50,
     },
     {
-      url: "https://images.unsplash.com/photo-1542744094-24638ea0b46c?q=80&w=600&auto=format&fit=crop",
+      url: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=600&auto=format&fit=crop", // Tech workers/collaboration
       top: "58%", left: "68%", width: 320, height: 480, rotation: -4, parallax: 45,
     },
     {
@@ -102,39 +102,36 @@ const ExperienceIntro: React.FC<ExperienceIntroProps> = () => {
     },
   ];
 
-  const word = "experiences";
+  const word = "ventures";
 
   // Data for Phase 2 text - Entire paragraph now uses the box fill animation
-  // Exact words and line breaks from the user's screenshot
   const allPhase2Boxes = [
     [
-      { text: "Creative", fillAt: 0.1 },
-      { text: "websites", fillAt: 0.13 },
-      { text: "are", fillAt: 0.16 },
+      { text: "Ziptech", fillAt: 0.1 },
+      { text: "operates", fillAt: 0.13 },
+      { text: "at", fillAt: 0.16 },
       { text: "the", fillAt: 0.19 }
     ],
     [
       { text: "intersection", fillAt: 0.28 },
       { text: "of", fillAt: 0.31 },
-      { text: "creativity", fillAt: 0.34 }
+      { text: "technology", fillAt: 0.34 }
     ],
     [
       { text: "and", fillAt: 0.43 },
-      { text: "technicality", fillAt: 0.46 },
-      { text: "to", fillAt: 0.49 },
-      { text: "form", fillAt: 0.52 }
+      { text: "business", fillAt: 0.46 },
+      { text: "development", fillAt: 0.49 },
+      { text: "to", fillAt: 0.52 }
     ],
     [
-      { text: "bespoke", fillAt: 0.61 },
-      { text: "digital", fillAt: 0.64 },
-      // spelling from screenshot matched or corrected? I'll use experiences as correct spelling is preferred, 
-      // but user reference image had a minor typo.
-      { text: "experiences", fillAt: 0.67 } 
+      { text: "transform", fillAt: 0.61 },
+      { text: "ideas", fillAt: 0.64 },
+      { text: "into", fillAt: 0.67 } 
     ],
     [
-      { text: "that", fillAt: 0.76 },
-      { text: "spark", fillAt: 0.79 },
-      { text: "emotion.", fillAt: 0.82 }
+      { text: "scalable", fillAt: 0.76 },
+      { text: "digital", fillAt: 0.79 },
+      { text: "ventures.", fillAt: 0.82 }
     ]
   ];
 
@@ -331,8 +328,8 @@ const ExperienceIntro: React.FC<ExperienceIntroProps> = () => {
                     [0, 1]
                   );
                   
-                  // Target "emotion." for the accent color, matching the reference screenshot
-                  const isAccentWord = box.text.includes("emotion");
+                  // Target "ventures." for the accent color
+                  const isAccentWord = box.text.includes("ventures");
 
                   return (
                     <motion.div 

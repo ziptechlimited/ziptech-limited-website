@@ -116,7 +116,7 @@ export default function ContactClient() {
             <FadeUp delay={0.3}>
               <div className="p-12 bg-white/5 rounded-[3rem] border border-white/10 backdrop-blur-md">
                  <p className="text-[10px] uppercase font-black tracking-[0.4em] text-white/30 mb-6 italic">Current Location</p>
-                 <h4 className="text-xl leading-relaxed mb-6">42 Nebula Way, Suite 101, <br />San Francisco, CA 94103</h4>
+                 <h4 className="text-xl leading-relaxed mb-6">Flat 4, Benson House, <br />Foster Street, Jikwoyi, FCT 900110 <br />Nigeria</h4>
                  <div className="flex items-center gap-2 text-[#00ffff] text-sm font-bold uppercase tracking-widest">
                     <span className="w-2 h-2 rounded-full bg-[#00ffff] animate-pulse"></span>
                     Open for partnerships
