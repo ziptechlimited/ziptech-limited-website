@@ -1,53 +1,98 @@
-# Ziptech Limited - Corporate Website 🚀
+# Ziptech Limited — Corporate Website 🚀
 
-Welcome to the official repository for **Ziptech Limited's** corporate website. This project is a visually stunning, meticulously crafted digital experience built to showcase our portfolio, services, and company culture at an Awwwards-competition level of design and performance.
+Welcome to the official repository for **Ziptech Limited's** corporate website. This modern, high‑performance site showcases our services, portfolio, and company culture with polished visuals, smooth motion, and strong accessibility.
 
 ## 🌟 Key Features
 
-- **Immersive 3D Interactions**: Features floating elements, complex scroll-driven animations leveraging Framer Motion, and cinematic typography reveals.
-- **Buttery Smooth Performance**: Optimized to 60fps with Next.js App Router, combining Server and Client components perfectly.
-- **Dynamic Theming**: An elegant dark-mode dominant aesthetic ("sidebar" theme) accented by custom neon cyan gradients.
-- **Premium Typography**: Features intermixed serif and modern sans-serif typefaces configured meticulously for contrast and hierarchy.
+- **Immersive Motion & 3D**: Scroll‑driven animations powered by Framer Motion and optional WebGL scenes with three.js/react‑three‑fiber.
+- **Smooth UX**: Turbocharged dev server, client/server components via Next.js App Router, and performance‑minded rendering.
+- **Dark Theming**: Elegant dark‑first aesthetic with accent gradients and thoughtful contrast.
+- **Composable UI**: Radix‑based components and utility‑first styling for rapid iteration.
 
 ## 🛠️ Technology Stack
 
-- **Framework**: [Next.js 14/15](https://nextjs.org/) (App Router)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Framework**: Next.js 15 (App Router)
+- **Styling**: Tailwind CSS v4 with @tailwindcss/postcss
+- **Animations**: Framer Motion
+- **Language**: TypeScript
+
+## ✅ Requirements
+
+- Node.js 18+ (recommended)
+- npm 10+ (or Bun 1+ if preferred)
 
 ## 🚀 Getting Started
 
-To run the development server locally:
+Run the site locally:
 
 ```bash
 # Install dependencies
 npm install
 
-# Run the development server
+# Start development (Turbopack)
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 in your browser.
+
+Using Bun:
+
+```bash
+bun install
+bun run dev
+```
+
+## 📜 Scripts
+
+- `dev` — Start Next.js in development with Turbopack
+- `build` — Production build
+- `start` — Run the production server
+- `lint` — Lint the codebase
 
 ## 📁 Project Structure
 
 ```text
+public/                     # Static assets (images, icons)
 src/
-├── app/                  # Next.js App Router (pages & layouts)
-│   ├── about/            # About page
-│   ├── work/             # Portfolio index and dynamic project pages
-│   ├── contact/          # Contact page
-│   ├── globals.css       # Global Tailwind CSS configurations
-│   └── layout.tsx        # Root HTML layout and global metadata
-├── components/
-│   ├── sections/         # Reusable page sections (Hero, Navbar, Footer, etc.)
-│   └── ui/               # Granular reusable UI elements
-├── lib/
-│   ├── project-data.ts   # Mocked data source for portfolio projects
-│   └── utils.ts          # Utility functions
+├─ app/                     # Next.js App Router (layouts & routes)
+│  ├─ about/                # About page
+│  ├─ work/                 # Portfolio index & dynamic project pages
+│  ├─ contact/              # Contact page
+│  ├─ globals.css           # Global styles (Tailwind v4)
+│  ├─ layout.tsx            # Root layout & metadata
+│  └─ page.tsx              # Home page
+├─ components/
+│  ├─ sections/             # Page sections (Hero, Navbar, Footer, etc.)
+│  ├─ ui/                   # Reusable UI primitives
+│  └─ providers/            # App‑level providers (e.g., smooth scrolling)
+├─ hooks/                   # Custom React hooks
+├─ lib/                     # Utilities & data (e.g., project-data.ts)
+└─ visual-edits/            # Visual edits messenger & helpers
 ```
 
-## 🎨 Design Philosophy
+## 🧪 Quality
 
-Our design relies heavily on "glassmorphism", deep shadows, and cinematic vignette overlays to draw focus to critical content elements. The color palette centers around deep blacks and charcoals contrasted sharply with energetic, high-saturation cyan (`#00ffff`), keeping true to the Ziptech Limited visual identity.
+- **Linting**: ESLint with Next.js config (`npm run lint`)
+- **Type Safety**: TypeScript with strict settings (`tsconfig.json`)
+
+## ☁️ Deployment
+
+- Recommended: **Vercel**
+  - Import the repository
+  - Build command: `next build`
+  - Output is auto‑detected; `next start` used for Node deployments outside Vercel
+  - Set any required environment variables in the platform dashboard (none required by default)
+
+## 🎨 Design Notes
+
+Glassmorphism accents, subtle shadows, and cinematic vignettes focus attention on key content. The palette leans toward deep neutrals with energetic cyan accents to reflect Ziptech’s brand.
+
+## 🤝 Contributing
+
+- Fork the repo and create a feature branch
+- Run `npm run lint` before opening a PR
+- Keep components small, composable, and accessible
+
+## 📄 License
+
+Copyright © Ziptech Limited. All rights reserved.
