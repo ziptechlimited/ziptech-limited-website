@@ -70,34 +70,42 @@ const ExperienceIntro: React.FC<ExperienceIntroProps> = () => {
   const images = [
     {
       url: "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?q=80&w=600&auto=format&fit=crop",
+      alt: "Developer workspace with laptop and accessories",
       top: "12%", left: "8%", width: 320, height: 480, rotation: -5, parallax: 40,
     },
     {
-      url: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=600&auto=format&fit=crop", // Computer desk
+      url: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=600&auto=format&fit=crop",
+      alt: "Modern computer desk setup",
       top: "18%", left: "72%", width: 340, height: 460, rotation: 3, parallax: 60,
     },
     {
       url: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=600&auto=format&fit=crop",
+      alt: "Portrait of person in creative workspace",
       top: "42%", left: "14%", width: 300, height: 450, rotation: 8, parallax: 30,
     },
     {
       url: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=600&auto=format&fit=crop",
+      alt: "Hands typing on keyboard",
       top: "32%", left: "84%", width: 360, height: 520, rotation: -2, parallax: 50,
     },
     {
-      url: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=600&auto=format&fit=crop", // Tech workers/collaboration
+      url: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=600&auto=format&fit=crop",
+      alt: "Team collaboration in office",
       top: "58%", left: "68%", width: 320, height: 480, rotation: -4, parallax: 45,
     },
     {
       url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop",
+      alt: "Notebook and workspace essentials",
       top: "72%", left: "10%", width: 340, height: 460, rotation: 6, parallax: 55,
     },
     {
       url: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=600&auto=format&fit=crop",
+      alt: "Two people discussing project details",
       top: "82%", left: "58%", width: 310, height: 440, rotation: -3, parallax: 35,
     },
     {
       url: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop",
+      alt: "Vintage typewriter and desk",
       top: "88%", left: "80%", width: 330, height: 490, rotation: 4, parallax: 65,
     },
   ];
@@ -198,7 +206,7 @@ const ExperienceIntro: React.FC<ExperienceIntroProps> = () => {
                   <div className="media-wrapper overflow-hidden rounded-sm shadow-2xl">
                     <Image 
                       src={img.url} 
-                      alt="" 
+                      alt={img.alt} 
                       width={img.width} 
                       height={img.height} 
                       className="media image w-full h-full object-cover scale-110"

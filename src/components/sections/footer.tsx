@@ -192,7 +192,7 @@ const Footer = () => {
             </h1>
           </motion.div>
 
-          <div className="w-full flex-col md:flex-row flex justify-between items-center text-[10px] sm:text-xs uppercase tracking-[0.1em] text-[#808080] gap-4">
+          <div className="w-full flex-col md:flex-row flex justify-between items-center text-[10px] sm:text-xs uppercase tracking-widest text-[#808080] gap-4">
             <div>
               &copy; {new Date().getFullYear()} Ziptech Limited. All rights
               reserved.

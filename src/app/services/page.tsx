@@ -2,8 +2,11 @@ import React from "react";
 import ServicesClient from "./services-client";
 
 export const metadata = {
-  title: "Our Services | Antigravity Design Studio",
-  description: "High-end design and development services. We specialize in fintech, healthcare, and premium digital experiences.",
+  title: "Services | Ziptech Limited",
+  description: "Technology solutions, digital growth, business development, venture incubation, and tech education.",
+  alternates: {
+    canonical: "/services",
+  },
 };
 
 export default function ServicesPage() {

@@ -7,6 +7,7 @@ import { motion, useScroll, useTransform, useInView, useSpring } from "framer-mo
 import { ProjectData } from "@/lib/project-data";
 import Navbar from "@/components/sections/navbar";
 import Footer from "@/components/sections/footer";
+import Script from "next/script";
 
 const FadeUp = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => {
   const ref = useRef(null);
@@ -123,6 +124,32 @@ export default function ClientProjectDetails({ project }: { project: ProjectData
           </div>
         </div>
       </section>
+      <Script id="breadcrumb-jsonld" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://ziptechlimited.com") + "/",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Work",
+              item: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://ziptechlimited.com") + "/work",
+            },
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: project.title,
+              item: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://ziptechlimited.com") + `/work/${project.slug}`,
+            },
+          ],
+        })}
+      </Script>
 
       {/* --- OVERVIEW DETAILS (Asymmetrical) --- */}
       <section className="py-[180px] px-[5vw] relative overflow-hidden">

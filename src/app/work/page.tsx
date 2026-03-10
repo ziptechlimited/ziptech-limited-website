@@ -3,8 +3,11 @@ import WorkIndexClient from "./work-index-client";
 import { projectsData } from "@/lib/project-data";
 
 export const metadata = {
-  title: "Our Work | Antigravity Design Studio",
-  description: "Explore our portfolio of award-winning digital experiences, from fintech solutions to healthcare platforms.",
+  title: "Work | Ziptech Limited",
+  description: "Explore Ziptech’s portfolio of high-impact digital products across fintech, health, and more.",
+  alternates: {
+    canonical: "/work",
+  },
 };
 
 export default function WorkPage() {
