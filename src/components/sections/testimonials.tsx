@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 
 const testimonials = [
   {
-    quote: "The team at Ziptech Limited have been amazing and critical to our UI/UX journey, they challenge our thoughts for the better and have allowed us to become South Africa’s fastest-growing Buy Now Pay Later platform. I cannot recommend them enough.",
+    quote: "The team at Ziptech Limited have been amazing and critical to our UI/UX journey, they challenge our thoughts for the better and have allowed us to become a leading Buy Now Pay Later platform. I cannot recommend them enough.",
     author: "Craig Newborn",
     role: "Former CEO, PayJustNow",
     position: { top: "15%", left: "8%" },
@@ -21,7 +21,7 @@ const testimonials = [
     zIndex: 20,
   },
   {
-    quote: "The Ziptech Limited team have a grasp of branding and product design like I've never seen before. We searched the globe for a tech-focused CI design agency and found that the top talent was right here in Cape Town.",
+    quote: "The Ziptech Limited team have a grasp of branding and product design like I've never seen before. We searched the globe for a tech-focused CI design agency and found that the top talent was right here.",
     author: "Colleen Harrison",
     role: "Former Head of Marketing, Payfast",
     position: { top: "42%", left: "12%" },
