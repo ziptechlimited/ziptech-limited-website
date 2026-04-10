@@ -16,9 +16,21 @@ const teamMembers = [
     bio: "A seasoned software engineer with 5+ years of experience leading technical teams and driving product vision.",
     image: "/David.jpeg",
     socials: [
-      { name: "LinkedIn", icon: <FaLinkedinIn className="w-4 h-4" /> },
-      { name: "Twitter", icon: <FaTwitter className="w-4 h-4" /> },
-      { name: "GitHub", icon: <FaGithub className="w-4 h-4" /> },
+      {
+        name: "LinkedIn",
+        icon: <FaLinkedinIn className="w-4 h-4" />,
+        href: "https://www.linkedin.com/in/obinna-okeke-8ba588377/",
+      },
+      {
+        name: "Twitter",
+        icon: <FaTwitter className="w-4 h-4" />,
+        href: "https://x.com/S0me0ne_u_love",
+      },
+      {
+        name: "GitHub",
+        icon: <FaGithub className="w-4 h-4" />,
+        href: "https://github.com/o-david",
+      },
     ],
   },
   {
@@ -27,33 +39,69 @@ const teamMembers = [
     bio: "An AI engineer with over 4 years of experience specializing in intelligent automated systems.",
     image: "/samuel.JPG",
     socials: [
-      { name: "LinkedIn", icon: <FaLinkedinIn className="w-4 h-4" /> },
-      { name: "Twitter", icon: <FaTwitter className="w-4 h-4" /> },
-      { name: "GitHub", icon: <FaGithub className="w-4 h-4" /> },
+      {
+        name: "LinkedIn",
+        icon: <FaLinkedinIn className="w-4 h-4" />,
+        href: "https://www.linkedin.com/in/samuel-swift-okeke/",
+      },
+      {
+        name: "Twitter",
+        icon: <FaTwitter className="w-4 h-4" />,
+        href: "https://twitter.com/SamuelSwiftOkeke",
+      },
+      {
+        name: "GitHub",
+        icon: <FaGithub className="w-4 h-4" />,
+        href: "https://github.com/SamuelSwiftOkeke",
+      },
     ],
   },
   {
-    name: "TBD",
-    role: "Lead Cyber Security",
-    bio: "Securing modern infrastructure and ensuring absolute integrity of our digital platforms.",
+    name: "Chigozie Okeke",
+    role: "Lead Data Analyst",
+    bio: "A data analyst with 5+ years of experience in analyzing and interpreting data to drive business decisions.",
     image:
-      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1287&auto=format&fit=crop", // generic cyber sec image
+      "https://res.cloudinary.com/dgxl5swen/image/upload/q_auto/f_auto/v1775751219/Chigozie.jpg", // generic cyber sec image
     socials: [
-      { name: "LinkedIn", icon: <FaLinkedinIn className="w-4 h-4" /> },
-      { name: "Twitter", icon: <FaTwitter className="w-4 h-4" /> },
-      { name: "GitHub", icon: <FaGithub className="w-4 h-4" /> },
+      {
+        name: "LinkedIn",
+        icon: <FaLinkedinIn className="w-4 h-4" />,
+        href: "https://www.linkedin.com/in/chigozieokeoke/",
+      },
+      {
+        name: "Twitter",
+        icon: <FaTwitter className="w-4 h-4" />,
+        href: "https://twitter.com/ChigozieOkeke",
+      },
+      {
+        name: "GitHub",
+        icon: <FaGithub className="w-4 h-4" />,
+        href: "https://github.com/ChigozieOkeke",
+      },
     ],
   },
   {
-    name: "TBD",
-    role: "Lead Cyber Security",
-    bio: "Securing modern infrastructure and ensuring absolute integrity of our digital platforms.",
+    name: "Hosea Agbo",
+    role: "Software Engineer",
+    bio: "A software engineer with years of experience in developing and maintaining software applications.",
     image:
-      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1287&auto=format&fit=crop", // generic cyber sec image
+      "https://res.cloudinary.com/dgxl5swen/image/upload/q_auto/f_auto/v1775751219/Hosea.jpg", // generic cyber sec image
     socials: [
-      { name: "LinkedIn", icon: <FaLinkedinIn className="w-4 h-4" /> },
-      { name: "Twitter", icon: <FaTwitter className="w-4 h-4" /> },
-      { name: "GitHub", icon: <FaGithub className="w-4 h-4" /> },
+      {
+        name: "LinkedIn",
+        icon: <FaLinkedinIn className="w-4 h-4" />,
+        href: "https://www.linkedin.com/in/hosea-agbo/",
+      },
+      {
+        name: "Twitter",
+        icon: <FaTwitter className="w-4 h-4" />,
+        href: "https://twitter.com/HoseaAgbo",
+      },
+      {
+        name: "GitHub",
+        icon: <FaGithub className="w-4 h-4" />,
+        href: "https://github.com/HoseaAgbo",
+      },
     ],
   },
 ];
@@ -227,8 +275,8 @@ const TeamSection = () => {
                   style={{
                     left: "50%",
                     top: "50%",
-                    x: `calc(${Math.cos(currentAngle) * radiusX}vw - 50%)`,
-                    y: `calc(${Math.sin(currentAngle) * radiusY}vw - 50%)`,
+                    x: `calc(${Number((Math.cos(currentAngle) * radiusX).toFixed(3))}vw - 50%)`,
+                    y: `calc(${Number((Math.sin(currentAngle) * radiusY).toFixed(3))}vw - 50%)`,
                   }}
                   onMouseEnter={() => setHoveredIndex(i)}
                   onMouseLeave={() => setHoveredIndex(null)}

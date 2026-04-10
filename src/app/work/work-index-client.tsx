@@ -8,7 +8,7 @@ import { ProjectData } from "@/lib/project-data";
 import Navbar from "@/components/sections/navbar";
 import Footer from "@/components/sections/footer";
 
-const categories = ["All", "Fintech", "Health", "Social", "Brand"];
+const categories = ["All", "Fintech", "Health", "Social", "Legal"];
 
 const SplitText = ({ text }: { text: string }) => {
   return (
@@ -18,7 +18,11 @@ const SplitText = ({ text }: { text: string }) => {
           <motion.span
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.1 + (i * 0.02) }}
+            transition={{
+              duration: 1,
+              ease: [0.22, 1, 0.36, 1],
+              delay: 0.1 + i * 0.02,
+            }}
             className="inline-block"
           >
             {char === " " ? "\u00A0" : char}
@@ -29,14 +33,22 @@ const SplitText = ({ text }: { text: string }) => {
   );
 };
 
-export default function WorkIndexClient({ projects }: { projects: ProjectData[] }) {
+export default function WorkIndexClient({
+  projects,
+}: {
+  projects: ProjectData[];
+}) {
   const [activeCategory, setActiveCategory] = useState("All");
-  const [hoveredProject, setHoveredProject] = useState<ProjectData | null>(null);
+  const [hoveredProject, setHoveredProject] = useState<ProjectData | null>(
+    null,
+  );
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const filteredProjects = projects.filter(p => 
-    activeCategory === "All" || p.category.toLowerCase().includes(activeCategory.toLowerCase())
+  const filteredProjects = projects.filter(
+    (p) =>
+      activeCategory === "All" ||
+      p.category.toLowerCase().includes(activeCategory.toLowerCase()),
   );
 
   useEffect(() => {
@@ -49,21 +61,24 @@ export default function WorkIndexClient({ projects }: { projects: ProjectData[] 
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end end"]
+    offset: ["start start", "end end"],
   });
 
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
-    restDelta: 0.001
+    restDelta: 0.001,
   });
 
   return (
-    <main ref={containerRef} className="bg-[#111] text-[#f0ebe3] min-h-screen selection:bg-[#00ffff] selection:text-[#111]">
+    <main
+      ref={containerRef}
+      className="bg-[#111] text-[#f0ebe3] min-h-screen selection:bg-[#00ffff] selection:text-[#111]"
+    >
       <Navbar onMenuToggle={() => {}} />
 
       {/* Progress Bar */}
-      <motion.div 
+      <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-[#00ffff] z-50 origin-left"
         style={{ scaleX }}
       />
@@ -82,8 +97,8 @@ export default function WorkIndexClient({ projects }: { projects: ProjectData[] 
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
                 className={`px-6 py-3 rounded-full border text-xs font-bold tracking-widest uppercase transition-all duration-500 ${
-                  activeCategory === cat 
-                    ? "bg-[#00ffff] border-[#00ffff] text-[#111]" 
+                  activeCategory === cat
+                    ? "bg-[#00ffff] border-[#00ffff] text-[#111]"
                     : "border-white/10 text-white/40 hover:border-white/40 hover:text-white"
                 }`}
               >
@@ -99,7 +114,7 @@ export default function WorkIndexClient({ projects }: { projects: ProjectData[] 
         <div className="max-w-[1600px] mx-auto">
           <div className="border-t border-white/10">
             {filteredProjects.map((project, index) => (
-              <Link 
+              <Link
                 key={project.id}
                 href={`/work/${project.slug}`}
                 onMouseEnter={() => setHoveredProject(project)}
@@ -109,20 +124,32 @@ export default function WorkIndexClient({ projects }: { projects: ProjectData[] 
                 <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
                   <div className="flex items-center gap-12">
                     <span className="text-xs font-bold text-[#00ffff] opacity-40 group-hover:opacity-100 transition-opacity">
-                      {String(index + 1).padStart(2, '0')}
+                      {String(index + 1).padStart(2, "0")}
                     </span>
                     <h2 className="text-[clamp(2.5rem,6vw,5rem)] leading-none font-medium uppercase tracking-tight transition-all duration-700 group-hover:italic group-hover:translate-x-4">
                       {project.title}
                     </h2>
                   </div>
-                  
+
                   <div className="flex items-center gap-8">
                     <span className="text-xs font-bold tracking-widest uppercase opacity-40 group-hover:opacity-100 transition-opacity">
                       {project.category}
                     </span>
                     <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center transition-all group-hover:bg-[#00ffff] group-hover:border-[#00ffff]">
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="group-hover:text-[#111] transition-colors">
-                        <path d="M1 13L13 1M13 1H5M13 1V9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 14 14"
+                        fill="none"
+                        className="group-hover:text-[#111] transition-colors"
+                      >
+                        <path
+                          d="M1 13L13 1M13 1H5M13 1V9"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
                       </svg>
                     </div>
                   </div>
@@ -141,27 +168,27 @@ export default function WorkIndexClient({ projects }: { projects: ProjectData[] 
         {hoveredProject && (
           <motion.div
             initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-            animate={{ 
-              opacity: 1, 
-              scale: 1, 
+            animate={{
+              opacity: 1,
+              scale: 1,
               rotate: 0,
               x: mousePos.x,
-              y: mousePos.y
+              y: mousePos.y,
             }}
             exit={{ opacity: 0, scale: 0.8, rotate: 5 }}
-            transition={{ 
-              type: "spring", 
-              stiffness: 150, 
-              damping: 20, 
+            transition={{
+              type: "spring",
+              stiffness: 150,
+              damping: 20,
               mass: 0.5,
-              opacity: { duration: 0.3 }
+              opacity: { duration: 0.3 },
             }}
             className="fixed top-0 left-0 w-[600px] h-[400px] pointer-events-none z-40 overflow-hidden rounded-2xl shadow-2xl hidden md:block" // Increased size
-            style={{ 
-              translateX: "-50%", 
+            style={{
+              translateX: "-50%",
               translateY: "-50%",
-              marginLeft: "40px", 
-              marginTop: "-40px"
+              marginLeft: "40px",
+              marginTop: "-40px",
             }}
           >
             <div className="relative w-full h-full">
@@ -180,7 +207,7 @@ export default function WorkIndexClient({ projects }: { projects: ProjectData[] 
       {/* --- CTA SECTION --- */}
       <section className="py-[20vh] px-[5vw] bg-white text-[#111] rounded-t-[4rem]">
         <div className="max-w-[1600px] mx-auto text-center">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
@@ -190,13 +217,17 @@ export default function WorkIndexClient({ projects }: { projects: ProjectData[] 
           </motion.h2>
 
           <MagneticButton>
-            <Link 
+            <Link
               href="/contact"
               className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-[#111] text-white flex items-center justify-center text-xs font-bold tracking-[0.2em] uppercase transition-colors hover:bg-[#00ffff] hover:text-[#111] group"
             >
               <div className="relative overflow-hidden">
-                <span className="block group-hover:-translate-y-full transition-transform duration-500">Get in touch</span>
-                <span className="absolute top-0 left-0 block translate-y-full group-hover:translate-y-0 transition-transform duration-500">Drop a line</span>
+                <span className="block group-hover:-translate-y-full transition-transform duration-500">
+                  Get in touch
+                </span>
+                <span className="absolute top-0 left-0 block translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                  Drop a line
+                </span>
               </div>
             </Link>
           </MagneticButton>
