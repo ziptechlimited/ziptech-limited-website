@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { X, Play, ArrowRight } from "lucide-react";
+import { offices } from "@/lib/offices";
 
 interface OverlayMenuProps {
   isOpen: boolean;
@@ -16,7 +17,7 @@ export default function OverlayMenu({ isOpen, onClose }: OverlayMenuProps) {
     const updateTime = () => {
       const now = new Date();
       const options: Intl.DateTimeFormatOptions = {
-        timeZone: "Africa/Johannesburg", // GMT+2
+        timeZone: "Africa/Lagos", // GMT+1 (WAT)
         hour: "2-digit",
         minute: "2-digit",
         second: "2-digit",
@@ -99,16 +100,26 @@ export default function OverlayMenu({ isOpen, onClose }: OverlayMenuProps) {
           <div className="flex flex-col gap-4 text-left md:text-right">
              <div className="flex items-center gap-4 group cursor-pointer md:flex-row-reverse">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent/40 group-hover:bg-accent transition-colors" />
-                <a href="tel:+27780548476" className="text-xl font-light hover:text-accent transition-colors">
-                  +27 (0) 78 054 8476
+                <a href="tel:+2348061938780" className="text-xl font-light hover:text-accent transition-colors">
+                  +234 806 1938 780
                 </a>
              </div>
              <div className="flex items-center gap-4 group cursor-pointer md:flex-row-reverse">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent/40 group-hover:bg-accent transition-colors" />
-                <a href="mailto:accounts@ziptech.com" className="text-xl font-light hover:text-accent transition-colors">
+                <a href="mailto:info@ziptechlimited.com" className="text-xl font-light hover:text-accent transition-colors">
                   Write Us
                 </a>
              </div>
+             {offices.map((office) => (
+               <div key={office.name} className="mt-2">
+                 <span className="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-2 block font-medium">{office.name}</span>
+                 <address className="not-italic text-sm font-light text-white/70">
+                   {office.lines.map((line) => (
+                     <span key={line} className="block">{line}</span>
+                   ))}
+                 </address>
+               </div>
+             ))}
           </div>
 
           {/* Social Links & Clock */}
@@ -131,7 +142,7 @@ export default function OverlayMenu({ isOpen, onClose }: OverlayMenuProps) {
             {/* Live Clock Section */}
             <div className="flex flex-col gap-2 border-t border-white/10 pt-6 w-full max-w-xs md:items-end">
               <p className="text-xs font-medium text-white/50 flex items-center gap-2">
-                <span className="text-white tabular-nums">{time}</span> (GMT+2)
+                <span className="text-white tabular-nums">{time}</span> (WAT)
               </p>
               <div className="md:text-right">
                 <p className="text-[10px] uppercase tracking-widest text-white/30">

@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import Navbar from "@/components/sections/navbar";
 import Footer from "@/components/sections/footer";
 import { FiArrowUpRight, FiMail, FiPhone, FiMapPin } from "react-icons/fi";
+import { offices } from "@/lib/offices";
 
 const FadeUp = ({
   children,
@@ -148,14 +149,20 @@ export default function ContactClient() {
 
             <FadeUp delay={0.3}>
               <div className="p-12 bg-white/5 rounded-[3rem] border border-white/10 backdrop-blur-md">
-                <p className="text-[10px] uppercase font-black tracking-[0.4em] text-white/30 mb-6 italic">
-                  Current Location
-                </p>
-                <h4 className="text-xl leading-relaxed mb-6">
-                  Flat 4, Benson House, <br />
-                  Foster Street, Jikwoyi, FCT 900110 <br />
-                  Nigeria
-                </h4>
+                {offices.map((office) => (
+                  <div key={office.name} className="mb-10">
+                    <p className="text-[10px] uppercase font-black tracking-[0.4em] text-white/30 mb-6 italic">
+                      {office.name}
+                    </p>
+                    <h4 className="text-xl leading-relaxed">
+                      {office.lines.map((line) => (
+                        <span key={line} className="block">
+                          {line}
+                        </span>
+                      ))}
+                    </h4>
+                  </div>
+                ))}
                 <div className="flex items-center gap-2 text-[#00ffff] text-sm font-bold uppercase tracking-widest">
                   <span className="w-2 h-2 rounded-full bg-[#00ffff] animate-pulse"></span>
                   Open for partnerships

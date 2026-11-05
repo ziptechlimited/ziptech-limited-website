@@ -5,6 +5,7 @@ import ErrorReporter from "@/components/ErrorReporter";
 import Script from "next/script";
 
 import SmoothScroll from "@/components/providers/smooth-scroll";
+import { offices } from "@/lib/offices";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -31,13 +32,15 @@ export const metadata: Metadata = {
   },
 
   description:
-    "Ziptech Limited is a technology and venture studio based in Abuja, Nigeria. We design and build scalable digital products while helping startups and businesses grow through software engineering, digital strategy, and business development advisory.",
+    "Ziptech Limited is a technology and venture studio with offices in Abuja and Lafia, Nigeria. We design and build scalable digital products while helping startups and businesses grow through software engineering, digital strategy, and business development advisory.",
 
   keywords: [
     "Ziptech Limited",
     "Ziptech Labs",
     "software development Nigeria",
     "web development Abuja",
+    "web development Lafia",
+    "software development Nasarawa",
     "mobile app development Nigeria",
     "Next.js development",
     "MERN stack development",
@@ -112,6 +115,16 @@ export default function RootLayout({
     name: "Ziptech Limited",
     url: siteUrl,
     logo: `${siteUrl}/bLogo.jpg`,
+    email: "info@ziptechlimited.com",
+    telephone: "+2348061938780",
+    address: offices.map((office) => ({
+      "@type": "PostalAddress",
+      streetAddress: office.streetAddress,
+      addressLocality: office.addressLocality,
+      addressRegion: office.addressRegion,
+      postalCode: office.postalCode,
+      addressCountry: "NG",
+    })),
   };
   const websiteJsonLd = {
     "@context": "https://schema.org",

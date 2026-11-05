@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { offices } from "@/lib/offices";
 
 const Footer = () => {
   const [time, setTime] = useState("");
@@ -176,6 +177,32 @@ const Footer = () => {
               <span className="text-sm text-[#808080]">WAT</span>
             </motion.div>
           </div>
+        </div>
+
+        {/* Office Addresses */}
+        <div className="md:mt-20 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8">
+          {offices.map((office, i) => (
+            <motion.div
+              key={office.name}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 + i * 0.1, duration: 0.8 }}
+              className="space-y-6"
+            >
+              <h6 className="text-xs uppercase tracking-[0.2em] text-[#808080] font-medium flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-[#00ffff] rounded-full inline-block"></span>
+                {office.name}
+              </h6>
+              <address className="not-italic text-lg text-white/70">
+                {office.lines.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
+              </address>
+            </motion.div>
+          ))}
         </div>
 
         {/* Bottom Section: Big Typography & Credits */}
