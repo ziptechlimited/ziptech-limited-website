@@ -6,6 +6,7 @@ import {
   AnimatePresence,
   useScroll,
   useTransform,
+  useInView,
 } from "framer-motion";
 import { FaLinkedinIn, FaTwitter, FaGithub } from "react-icons/fa";
 
@@ -48,11 +49,6 @@ const teamMembers = [
         name: "Twitter",
         icon: <FaTwitter className="w-4 h-4" />,
         href: "https://twitter.com/SamuelSwiftOkeke",
-      },
-      {
-        name: "GitHub",
-        icon: <FaGithub className="w-4 h-4" />,
-        href: "https://github.com/SamuelSwiftOkeke",
       },
     ],
   },
@@ -97,11 +93,6 @@ const teamMembers = [
         icon: <FaTwitter className="w-4 h-4" />,
         href: "https://twitter.com/HoseaAgbo",
       },
-      {
-        name: "GitHub",
-        icon: <FaGithub className="w-4 h-4" />,
-        href: "https://github.com/HoseaAgbo",
-      },
     ],
   },
 ];
@@ -110,9 +101,25 @@ const TeamSection = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [rotation, setRotation] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef);
+  const leaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Smooth orbital rotation loop
+  const showMember = (i: number) => {
+    if (leaveTimer.current) clearTimeout(leaveTimer.current);
+    setHoveredIndex(i);
+  };
+  const hideMemberSoon = () => {
+    if (leaveTimer.current) clearTimeout(leaveTimer.current);
+    leaveTimer.current = setTimeout(() => setHoveredIndex(null), 400);
+  };
+
+  useEffect(() => () => {
+    if (leaveTimer.current) clearTimeout(leaveTimer.current);
+  }, []);
+
+  // Smooth orbital rotation loop, paused while the section is off screen
   useEffect(() => {
+    if (!isInView) return;
     let animationFrameId: number;
     const animate = () => {
       if (hoveredIndex === null) {
@@ -122,7 +129,7 @@ const TeamSection = () => {
     };
     animate();
     return () => cancelAnimationFrame(animationFrameId);
-  }, [hoveredIndex]);
+  }, [hoveredIndex, isInView]);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -200,7 +207,9 @@ const TeamSection = () => {
                     y: -20,
                   }}
                   transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                  className="text-center max-w-sm"
+                  onMouseEnter={() => showMember(hoveredIndex)}
+                  onMouseLeave={hideMemberSoon}
+                  className="text-center max-w-sm pointer-events-auto"
                 >
                   <h3 className="text-4xl md:text-5xl lg:text-6xl font-medium uppercase tracking-tight mb-2 italic">
                     {teamMembers[hoveredIndex].name}
@@ -215,7 +224,10 @@ const TeamSection = () => {
                     {teamMembers[hoveredIndex].socials.map((s) => (
                       <a
                         key={s.name}
-                        href="#"
+                        href={s.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={s.name}
                         className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#00ffff] hover:text-[#020202] transition-all duration-700 hover:scale-110"
                       >
                         {s.icon}
@@ -278,8 +290,8 @@ const TeamSection = () => {
                     x: `calc(${Number((Math.cos(currentAngle) * radiusX).toFixed(3))}vw - 50%)`,
                     y: `calc(${Number((Math.sin(currentAngle) * radiusY).toFixed(3))}vw - 50%)`,
                   }}
-                  onMouseEnter={() => setHoveredIndex(i)}
-                  onMouseLeave={() => setHoveredIndex(null)}
+                  onMouseEnter={() => showMember(i)}
+                  onMouseLeave={hideMemberSoon}
                   animate={{
                     scale: hoveredIndex === i ? 1.15 : 1,
                     opacity:

@@ -52,12 +52,12 @@ const FAQSection = () => {
     {
       question: "What types of projects do you take on?",
       answer:
-        "We specialise in branding and UX/UI design for websites and apps, but our approach is versatile. Whether it’s a full brand identity, a design system build, or ongoing design support, we adapt to fit your business goals.",
+        "We build custom software, websites, web apps and mobile apps, and support businesses with digital growth, business development advisory and venture incubation. Whether you need a new product built from scratch or help scaling an existing one, we adapt to fit your business goals.",
     },
     {
       question: "Which industries do you work with?",
       answer:
-        "Our core expertise is in fintech and e-commerce, but we’ve partnered with clients across hospitality, law, accounting, packaging, edtech and many more. We are an agile team and our skills can adapt to most verticals, bringing a fresh, human-centric perspective to any industry.",
+        "We’ve delivered products for clients in fintech, health, social platforms and legal services. We are an agile team and our skills adapt to most industries, bringing a fresh, human-centric perspective to every project.",
     },
     {
       question: "How does your pricing work?",
@@ -67,17 +67,17 @@ const FAQSection = () => {
     {
       question: "Do you handle development too?",
       answer:
-        "We focus on what we do best: design. For development, we collaborate with trusted partners we believe are the best of the best. If you already have a dev team, we’ll work hand-in-hand with them to ensure a smooth handover and seamless build.",
+        "Yes. Development is at the core of what we do: our in-house engineers design, build and launch your product end to end. If you already have a dev team, we’ll work hand-in-hand with them to ensure a smooth handover and seamless build.",
     },
     {
-      question: "What is your design process like?",
+      question: "What is your process like?",
       answer:
-        "Every project begins with a discovery session to align on your goals. From there, we move through two key phases: UX Discovery & Design, where we focus on research, user flows, and wireframes to create an intuitive experience, and UI Discovery & Design, where we bring your brand to life through polished, visually engaging interfaces. We work transparently, keep you involved at every stage, and iterate throughout the process to ensure the final product meets your vision.",
+        "Every project moves through four stages. Discovery: we dig into your goals, audience and requirements. Design: iterative sprints on user experience and visual design. Develop: clean, well-tested code with continuous integration. Deliver: a smooth launch and post-launch support. We work transparently and keep you involved at every stage.",
     },
     {
       question: "How long does a typical project take?",
       answer:
-        "Timelines depend on scope, but most branding projects take roughly 6 to 8 weeks, and websites or apps typically run 8 to 12 weeks from kickoff to development handover. We’ll always share a timeline upfront to ensure clarity and structure.",
+        "Timelines depend on scope. A website typically takes a few weeks, while a custom web or mobile app usually runs a few months from kickoff to launch. We’ll always share a timeline upfront to ensure clarity and structure.",
     },
   ];
 

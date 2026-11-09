@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { offices } from "@/lib/offices";
+import { socialLinks } from "@/lib/socials";
 
 const Footer = () => {
   const [time, setTime] = useState("");
@@ -35,13 +36,6 @@ const Footer = () => {
   }, []);
 
   const navLinks = ["Home", "Work", "About", "Services", "Contact"];
-  const socialLinks = [
-    "Instagram",
-    "Facebook",
-    "LinkedIn",
-    "Awwwards",
-    "Behance",
-  ];
 
   return (
     <footer
@@ -95,7 +89,7 @@ const Footer = () => {
             </h6>
             <nav className="flex flex-col gap-3">
               {socialLinks.map((social, i) => (
-                <div key={social} className="overflow-hidden">
+                <div key={social.name} className="overflow-hidden">
                   <motion.div
                     initial={{ y: 20, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
@@ -107,12 +101,12 @@ const Footer = () => {
                     }}
                   >
                     <a
-                      href="#"
+                      href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group flex items-center gap-2 text-lg hover:text-[#00ffff] transition-colors w-fit"
                     >
-                      <span>{social}</span>
+                      <span>{social.name}</span>
                       <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
                         ↗
                       </span>
@@ -180,7 +174,7 @@ const Footer = () => {
         </div>
 
         {/* Office Addresses */}
-        <div className="md:mt-20 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8">
+        <div className="md:mt-20 grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
           {offices.map((office, i) => (
             <motion.div
               key={office.name}
@@ -200,6 +194,14 @@ const Footer = () => {
                     {line}
                   </span>
                 ))}
+                {office.phone && (
+                  <a
+                    href={`tel:${office.phone.tel}`}
+                    className="block mt-3 hover:text-white transition-colors w-fit"
+                  >
+                    {office.phone.display}
+                  </a>
+                )}
               </address>
             </motion.div>
           ))}

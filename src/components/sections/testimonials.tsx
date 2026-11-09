@@ -142,7 +142,7 @@ const Testimonials = () => {
               What people say
             </h2>
              <h2 className="text-[18vw] font-display font-bold text-foreground/3 leading-[0.85] whitespace-nowrap uppercase tracking-tighter ml-[15vw]">
-              about me
+              about us
             </h2>
           </motion.div>
         </div>

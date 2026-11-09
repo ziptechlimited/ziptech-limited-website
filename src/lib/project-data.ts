@@ -8,7 +8,7 @@ export type ProjectData = {
   overview: string;
   client: string;
   role: string;
-  timeline: string;
+  timeline?: string;
   challenge: string;
   solution: string;
   impact: string;
@@ -19,6 +19,50 @@ export type ProjectData = {
 };
 
 export const projectsData: ProjectData[] = [
+  {
+    id: 6,
+    slug: "greenrev",
+    title: "GreenRev",
+    category: "Automotive",
+    tags: ["Product Design", "Web Development", "Marketplace", "UX Strategy"],
+    heroImage: "/greenrev.jpg",
+    overview:
+      "GreenRev is one automotive ecosystem: a platform connecting car buyers with independent vehicle dealers, automotive parts vendors, mechanics and other automotive service providers. Ziptech designed and built the platform, bringing the showroom, the parts marketplace and expert services together in one place.",
+    client: "GreenRev",
+    role: "Product Design & Web Development",
+    challenge:
+      "Buying, maintaining and upgrading a car means dealing with dealers, parts vendors and mechanics who all live on different channels. The challenge was to bring that fragmented market into a single experience that feels premium and stays easy to navigate.",
+    solution:
+      "We built a cinematic platform with a curated Showroom, a Parts & Performance catalogue and an Expert Care network for booking mechanics and service centres, supported by a side-by-side comparison tool and a vehicle valuation flow.",
+    impact:
+      "One platform for the whole car journey and a modern storefront for independent dealers, parts vendors and mechanics.",
+    detailImages: ["/greenrev-showroom.jpg"],
+    nextProjectSlug: "drum-debleeder",
+    nextProjectTitle: "Drum Debleeder",
+    liveUrl: "https://greenrevs.com",
+  },
+  {
+    id: 7,
+    slug: "drum-debleeder",
+    title: "Drum Debleeder",
+    category: "Audio Software",
+    tags: ["Audio Software", "Plugin Development", "Product Design", "Web Development"],
+    heroImage: "/drum-debleeder.jpg",
+    overview:
+      "Drum Debleeder is iSwift Audio's drum gate with cymbal de-bleed. Five drum-specific detectors keep the hit and the ring of each drum while removing the rest of the kit bleeding into the mic. It runs as an Audio Unit and VST3 plugin on Mac and Windows.",
+    client: "iSwift Audio",
+    role: "Product Design & Development",
+    challenge:
+      "Every close mic on a drum kit hears the whole kit: hi-hat in the snare, snare in the toms, cymbals in everything. Turn the drum up and the bleed comes with it, while an ordinary gate chokes the ring, misses ghost notes and opens for every hat.",
+    solution:
+      "We built a drum-aware gate with five detectors, each tuned to a specific drum, that listen to their own frequency range and reject spill from the rest of the kit, alongside an interactive product site where engineers can hear the difference.",
+    impact:
+      "Engineers keep the drum and lose the kit, with cleaner close mics that hold on to the natural ring.",
+    detailImages: ["/drum-debleeder-detail.jpg"],
+    nextProjectSlug: "area-hood",
+    nextProjectTitle: "Area Hood",
+    liveUrl: "https://www.iswiftaudio.com/",
+  },
   {
     id: 1,
     slug: "area-hood",
@@ -143,8 +187,8 @@ export const projectsData: ProjectData[] = [
       "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2070&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2015&auto=format&fit=crop",
     ],
-    nextProjectSlug: "area-hood",
-    nextProjectTitle: "Area Hood",
+    nextProjectSlug: "greenrev",
+    nextProjectTitle: "GreenRev",
     liveUrl: "https://www.oakolawoleandco.com/",
   },
 ];

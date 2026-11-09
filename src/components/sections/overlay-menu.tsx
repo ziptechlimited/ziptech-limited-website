@@ -2,7 +2,9 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { X, Play, ArrowRight } from "lucide-react";
+import { useLenis } from "lenis/react";
 import { offices } from "@/lib/offices";
+import { socialLinks } from "@/lib/socials";
 
 interface OverlayMenuProps {
   isOpen: boolean;
@@ -12,6 +14,18 @@ interface OverlayMenuProps {
 export default function OverlayMenu({ isOpen, onClose }: OverlayMenuProps) {
   const [time, setTime] = useState("");
   const videoRef = useRef<HTMLVideoElement>(null);
+  const lenis = useLenis();
+
+  // Keep the page behind the menu still while it is open
+  useEffect(() => {
+    if (!isOpen) return;
+    document.body.style.overflow = "hidden";
+    lenis?.stop();
+    return () => {
+      document.body.style.overflow = "";
+      lenis?.start();
+    };
+  }, [isOpen, lenis]);
 
   useEffect(() => {
     const updateTime = () => {
@@ -73,7 +87,7 @@ export default function OverlayMenu({ isOpen, onClose }: OverlayMenuProps) {
       </div>
 
       {/* Main Content: Navigation & Studio Info */}
-      <div className="grow flex flex-col md:flex-row px-[5vw] py-12 md:py-20 z-10 h-full overflow-y-auto">
+      <div data-lenis-prevent className="grow flex flex-col md:flex-row px-[5vw] py-12 md:py-20 z-10 h-full overflow-y-auto">
         {/* Navigation Links */}
         <nav className="w-full md:w-1/2 flex flex-col gap-4 md:gap-8 justify-center">
           {[
@@ -81,11 +95,13 @@ export default function OverlayMenu({ isOpen, onClose }: OverlayMenuProps) {
             { label: "Work", href: "/work" },
             { label: "About", href: "/about" },
             { label: "Services", href: "/services" },
+            // Desktop has the Contact Us button in the header instead
+            { label: "Contact", href: "/contact", className: "md:hidden" },
           ].map((link, idx) => (
             <a
               key={idx}
               href={link.href}
-              className="group flex items-center gap-4 text-[clamp(3rem,8vw,5.5rem)] font-medium leading-[1.1] tracking-tighter hover:text-accent transition-colors duration-300"
+              className={`${link.className ?? ""} group flex items-center gap-4 text-[clamp(3rem,8vw,5.5rem)] font-medium leading-[1.1] tracking-tighter hover:text-accent transition-colors duration-300`}
             >
               <span className="opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all duration-300 w-4 h-4 rounded-full bg-accent" />
               <span>{link.label}</span>
@@ -117,6 +133,9 @@ export default function OverlayMenu({ isOpen, onClose }: OverlayMenuProps) {
                    {office.lines.map((line) => (
                      <span key={line} className="block">{line}</span>
                    ))}
+                   {office.phone && (
+                     <a href={`tel:${office.phone.tel}`} className="block mt-1 hover:text-accent transition-colors">{office.phone.display}</a>
+                   )}
                  </address>
                </div>
              ))}
@@ -127,13 +146,15 @@ export default function OverlayMenu({ isOpen, onClose }: OverlayMenuProps) {
             <div className="flex flex-col gap-4">
               <span className="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-2 block font-medium">Social</span>
               <div className="flex flex-wrap gap-x-8 gap-y-4 md:justify-end">
-                {["Instagram", "Facebook", "LinkedIn", "Awwwards", "Behance"].map((social) => (
+                {socialLinks.map((social) => (
                   <a
-                    key={social}
-                    href="#"
+                    key={social.name}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-sm font-medium hover:text-accent transition-colors border-b border-transparent hover:border-accent"
                   >
-                    {social}
+                    {social.name}
                   </a>
                 ))}
               </div>

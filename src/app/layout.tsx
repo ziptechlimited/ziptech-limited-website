@@ -6,6 +6,7 @@ import Script from "next/script";
 
 import SmoothScroll from "@/components/providers/smooth-scroll";
 import { offices } from "@/lib/offices";
+import { socialLinks } from "@/lib/socials";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "Ziptech Limited is a technology and venture studio with offices in Abuja and Lafia, Nigeria. We design and build scalable digital products while helping startups and businesses grow through software engineering, digital strategy, and business development advisory.",
+    "Ziptech Limited is a technology and venture studio with offices in Abuja, Lafia and Umuahia, Nigeria. We design and build scalable digital products while helping startups and businesses grow through software engineering, digital strategy, and business development advisory.",
 
   keywords: [
     "Ziptech Limited",
@@ -41,6 +42,8 @@ export const metadata: Metadata = {
     "web development Abuja",
     "web development Lafia",
     "software development Nasarawa",
+    "software development Umuahia",
+    "web development Abia State",
     "mobile app development Nigeria",
     "Next.js development",
     "MERN stack development",
@@ -117,6 +120,15 @@ export default function RootLayout({
     logo: `${siteUrl}/bLogo.jpg`,
     email: "info@ziptechlimited.com",
     telephone: "+2348061938780",
+    contactPoint: [
+      { "@type": "ContactPoint", telephone: "+2348061938780", contactType: "customer service", areaServed: "NG" },
+      ...offices.flatMap((office) =>
+        office.phone
+          ? [{ "@type": "ContactPoint", telephone: office.phone.tel, contactType: "customer service", areaServed: office.addressRegion }]
+          : [],
+      ),
+    ],
+    sameAs: socialLinks.map((social) => social.href),
     address: offices.map((office) => ({
       "@type": "PostalAddress",
       streetAddress: office.streetAddress,
@@ -134,7 +146,7 @@ export default function RootLayout({
   };
   return (
     <html lang="en">
-      <body className="antialiased">
+      <body className="antialiased" suppressHydrationWarning>
         {GA_ID && (
           <>
             <Script
@@ -167,7 +179,7 @@ export default function RootLayout({
         </Script>
         <ErrorReporter />
         <SmoothScroll>{children}</SmoothScroll>
-        <VisualEditsMessenger />
+        {process.env.NODE_ENV === "development" && <VisualEditsMessenger />}
       </body>
     </html>
   );

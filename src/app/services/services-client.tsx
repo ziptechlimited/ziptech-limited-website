@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
+import { useRouter } from "next/navigation";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import Navbar from "@/components/sections/navbar";
 import Footer from "@/components/sections/footer";
@@ -56,6 +57,7 @@ const FadeUp = ({ children, delay = 0 }: { children: React.ReactNode, delay?: nu
 };
 
 export default function ServicesClient() {
+  const router = useRouter();
   const horizontalRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: horizontalRef,
@@ -66,7 +68,7 @@ export default function ServicesClient() {
 
   return (
     <main className="bg-[#0a0a0a] text-[#f0ebe3] selection:bg-[#00ffff] selection:text-[#111]">
-      <Navbar onMenuToggle={() => {}} />
+      <Navbar />
 
       {/* --- HERO SECTION (Pinned Scale) --- */}
       <section className="relative h-[200vh] w-full">
@@ -126,7 +128,7 @@ export default function ServicesClient() {
                       </span>
                     ))}
                   </div>
-                  <button className="flex items-center gap-3 text-xs font-black tracking-[0.2em] uppercase text-[#00ffff] group/btn">
+                  <button onClick={() => router.push("/contact")} className="flex items-center gap-3 text-xs font-black tracking-[0.2em] uppercase text-[#00ffff] group/btn">
                     Explore Service 
                     <FiArrowRight className="transition-transform group-hover/btn:translate-x-2" />
                   </button>
@@ -182,7 +184,7 @@ export default function ServicesClient() {
               Ready to redefine 
               <span className="text-[#00ffff] font-medium uppercase italic scale-110 mt-4">your digital edge?</span>
             </h3>
-            <button className="group relative bg-white text-[#111] px-12 py-6 rounded-full text-xs font-black tracking-[0.3em] uppercase overflow-hidden transition-all hover:pr-16">
+            <button onClick={() => router.push("/contact")} className="group relative bg-white text-[#111] px-12 py-6 rounded-full text-xs font-black tracking-[0.3em] uppercase overflow-hidden transition-all hover:pr-16">
                <span className="relative z-10 transition-colors group-hover:text-white">Start a Project</span>
                <div className="absolute inset-0 bg-[#00ffff] scale-x-0 origin-right transition-transform duration-500 group-hover:scale-x-100" />
                <div className="absolute right-6 top-1/2 -translate-y-1/2 z-10 opacity-0 group-hover:opacity-100 transition-opacity">

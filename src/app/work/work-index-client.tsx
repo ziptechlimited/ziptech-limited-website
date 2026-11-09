@@ -8,7 +8,7 @@ import { ProjectData } from "@/lib/project-data";
 import Navbar from "@/components/sections/navbar";
 import Footer from "@/components/sections/footer";
 
-const categories = ["All", "Fintech", "Health", "Social", "Legal"];
+const categories = ["All", "Automotive", "Audio", "Fintech", "Health", "Social", "Legal"];
 
 const SplitText = ({ text }: { text: string }) => {
   return (
@@ -75,7 +75,7 @@ export default function WorkIndexClient({
       ref={containerRef}
       className="bg-[#111] text-[#f0ebe3] min-h-screen selection:bg-[#00ffff] selection:text-[#111]"
     >
-      <Navbar onMenuToggle={() => {}} />
+      <Navbar />
 
       {/* Progress Bar */}
       <motion.div

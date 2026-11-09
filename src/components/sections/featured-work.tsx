@@ -3,14 +3,19 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { projectsData as projects } from "@/lib/project-data";
+import { projectsData } from "@/lib/project-data";
+
+const FEATURED_SLUGS = ["greenrev", "drum-debleeder", "oakolawoleandco", "area-hood", "sarinmota"];
+const projects = FEATURED_SLUGS.flatMap((slug) =>
+  projectsData.filter((project) => project.slug === slug),
+);
 
 const FULL_H = "clamp(480px, 65vh, 720px)";
 const REST_H = "72%";
 
 export default function FeaturedWork() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  const cursorRef = useRef<HTMLDivElement>(null);
   const [cursorVisible, setCursorVisible] = useState(false);
   const targetRef = useRef({ x: 0, y: 0 });
   const currentRef = useRef({ x: 0, y: 0 });
@@ -25,7 +30,10 @@ export default function FeaturedWork() {
   const tick = useCallback(() => {
     currentRef.current.x = lerp(currentRef.current.x, targetRef.current.x, 0.1);
     currentRef.current.y = lerp(currentRef.current.y, targetRef.current.y, 0.1);
-    setCursorPos({ x: currentRef.current.x, y: currentRef.current.y });
+    // Written straight to the DOM so the section doesn't re-render every frame
+    if (cursorRef.current) {
+      cursorRef.current.style.transform = `translate(${currentRef.current.x + 20}px, ${currentRef.current.y - 20}px)`;
+    }
     rafRef.current = requestAnimationFrame(tick);
   }, []);
 
@@ -65,13 +73,14 @@ export default function FeaturedWork() {
     <>
       {/* Custom cursor badge */}
       <div
+        ref={cursorRef}
         style={{
           position: "fixed",
           top: 0,
           left: 0,
           zIndex: 9999,
           pointerEvents: "none",
-          transform: `translate(${cursorPos.x + 20}px, ${cursorPos.y - 20}px)`,
+          transform: "translate(20px, -20px)",
           opacity: cursorVisible && hoveredIndex !== null ? 1 : 0,
           transition: "opacity 0.2s ease",
           willChange: "transform",

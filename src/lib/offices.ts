@@ -18,5 +18,13 @@ export const offices = [
       "Opposite Nasarawa State Internal Revenue Service Board Office (NSIRS), Jos Road",
     addressLocality: "Lafia",
     addressRegion: "Nasarawa State",
+    phone: { display: "+234 901 455 3665", tel: "+2349014553665" },
+  },
+  {
+    name: "Umuahia Branch",
+    lines: ["50B Mission Hill, Along Shelton Hotel,", "Umuahia, Abia State,", "Nigeria"],
+    streetAddress: "50B Mission Hill, Along Shelton Hotel",
+    addressLocality: "Umuahia",
+    addressRegion: "Abia State",
   },
 ];

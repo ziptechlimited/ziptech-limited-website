@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useEffect } from 'react';
-import { motion, AnimatePresence, Variants } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { sendContact, type ContactStatus } from '@/lib/send-contact';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { X } from 'lucide-react';
+import { useLenis } from 'lenis/react';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -10,17 +12,40 @@ interface ContactModalProps {
 }
 
 const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
+  const lenis = useLenis();
+  const [status, setStatus] = useState<ContactStatus>('idle');
+
+  useEffect(() => {
+    if (isOpen) setStatus('idle');
+  }, [isOpen]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    setStatus('sending');
+    try {
+      await sendContact({
+        name: `${data.get('firstName')} ${data.get('lastName')}`.trim(),
+        email: String(data.get('email')),
+        message: String(data.get('projectDetails')),
+      });
+      setStatus('sent');
+      setTimeout(onClose, 1500);
+    } catch {
+      setStatus('error');
+    }
+  };
+
   // Prevent scrolling when modal is open
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
+    if (!isOpen) return;
+    document.body.style.overflow = 'hidden';
+    lenis?.stop();
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = '';
+      lenis?.start();
     };
-  }, [isOpen]);
+  }, [isOpen, lenis]);
 
   const overlayVariants: Variants = {
     hidden: { opacity: 0 },
@@ -79,8 +104,9 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
             animate="visible"
             exit="exit"
           >
-            <motion.div 
-              className="w-full sm:max-w-3xl bg-sidebar border-t sm:border border-white/10 sm:rounded-3xl p-8 sm:p-16 pointer-events-auto h-[90vh] sm:h-auto overflow-y-auto"
+            <motion.div
+              data-lenis-prevent
+              className="w-full sm:max-w-3xl bg-sidebar border-t sm:border border-white/10 sm:rounded-3xl p-8 sm:p-16 pointer-events-auto h-[90vh] sm:h-auto sm:max-h-[calc(100vh-3rem)] overflow-y-auto"
               variants={modalVariants}
               onClick={(e) => e.stopPropagation()}
             >
@@ -102,6 +128,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.4, duration: 0.5 }}
                   onClick={onClose}
+                  aria-label="Close"
                   className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white/70 hover:text-white hover:border-[#00ffff] hover:bg-[#00ffff]/10 transition-all duration-300 group"
                 >
                   <X className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" />
@@ -116,13 +143,14 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                 variants={{
                   visible: { transition: { staggerChildren: 0.1, delayChildren: 0.4 } }
                 }}
-                onSubmit={(e) => { e.preventDefault(); onClose(); }}
+                onSubmit={handleSubmit}
               >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                   <motion.div variants={itemVariants} className="relative group">
                     <input 
                       type="text" 
                       id="firstName"
+                      name="firstName"
                       required
                       className="w-full bg-transparent border-b border-white/20 py-4 text-xl text-[#FBFBF4] placeholder-transparent focus:outline-none focus:border-[#00ffff] transition-colors peer"
                       placeholder="First Name"
@@ -136,6 +164,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                     <input 
                       type="text" 
                       id="lastName"
+                      name="lastName"
                       required
                       className="w-full bg-transparent border-b border-white/20 py-4 text-xl text-[#FBFBF4] placeholder-transparent focus:outline-none focus:border-[#00ffff] transition-colors peer"
                       placeholder="Last Name"
@@ -150,6 +179,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                   <input 
                     type="email" 
                     id="email"
+                    name="email"
                     required
                     className="w-full bg-transparent border-b border-white/20 py-4 text-xl text-[#FBFBF4] placeholder-transparent focus:outline-none focus:border-[#00ffff] transition-colors peer"
                     placeholder="Email Address"
@@ -162,6 +192,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                 <motion.div variants={itemVariants} className="relative group">
                   <textarea 
                     id="projectDetails"
+                    name="projectDetails"
                     rows={3}
                     required
                     className="w-full bg-transparent border-b border-white/20 py-4 text-xl text-[#FBFBF4] placeholder-transparent focus:outline-none focus:border-[#00ffff] transition-colors peer resize-none"
@@ -172,17 +203,27 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                   </label>
                 </motion.div>
 
-                <motion.div variants={itemVariants} className="pt-8 flex justify-end">
-                  <button 
+                <motion.div variants={itemVariants} className="pt-8 flex flex-col items-end gap-6">
+                  <button
                     type="submit"
+                    disabled={status === 'sending' || status === 'sent'}
                     className="group relative flex items-center gap-4 py-5 px-10 rounded-full overflow-hidden transition-all duration-500 border border-white/20 hover:border-[#00ffff]"
                   >
                     <span className="relative z-10 text-sm font-medium uppercase tracking-[0.2em] text-[#FBFBF4] group-hover:text-black transition-colors duration-500">
-                      Send Inquiry
+                      {status === 'sending' ? 'Sending...' : status === 'sent' ? 'Sent' : 'Send Inquiry'}
                     </span>
                     <div className="absolute inset-0 bg-[#00ffff] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] rounded-full"></div>
                     <div className="relative z-10 w-2 h-2 rounded-full bg-[#00ffff] group-hover:bg-black transition-colors duration-500"></div>
                   </button>
+                  <p role="status" className="text-white/70 text-right">
+                    {status === 'sent' && "Thanks — we'll be in touch soon."}
+                    {status === 'error' && (
+                      <span className="text-[#ff6b6b]">
+                        Your message couldn&apos;t be sent. Please email us at{' '}
+                        <a href="mailto:info@ziptechlimited.com" className="underline">info@ziptechlimited.com</a>.
+                      </span>
+                    )}
+                  </p>
                 </motion.div>
 
               </motion.form>

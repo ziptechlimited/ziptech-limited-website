@@ -9,9 +9,156 @@ import {
   useMotionValue,
   useTransform,
   useScroll,
+  type MotionValue,
 } from "framer-motion";
 
 interface ExperienceIntroProps {}
+
+const FloatingImage = ({
+  img,
+  isHovered,
+  springX,
+  springY,
+}: {
+  img: {
+    url: string;
+    alt: string;
+    top: string;
+    left: string;
+    width: number;
+    height: number;
+    rotation: number;
+    parallax: number;
+  };
+  isHovered: boolean;
+  springX: MotionValue<number>;
+  springY: MotionValue<number>;
+}) => {
+  const px = useTransform(springX, (v) => v * img.parallax);
+  const py = useTransform(springY, (v) => v * img.parallax);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9, rotate: img.rotation - 5 }}
+      animate={{
+        opacity: isHovered ? 1 : 0,
+        scale: isHovered ? 1 : 0.9,
+        rotate: isHovered ? img.rotation : img.rotation - 5,
+        y: isHovered ? 0 : 20,
+      }}
+      style={{
+        top: img.top,
+        left: img.left,
+        width: `${(img.width / 1440) * 100}vw`,
+        maxWidth: "280px",
+        x: px,
+        y: py,
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 100,
+        damping: 20,
+        mass: 0.5,
+      }}
+      className="aspect-3/4 relative overflow-hidden bg-zinc-900"
+    >
+      <div className="media-wrapper overflow-hidden rounded-sm shadow-2xl">
+        <Image
+          src={img.url}
+          alt={img.alt}
+          width={img.width}
+          height={img.height}
+          className="media image w-full h-full object-cover scale-110"
+          priority
+        />
+      </div>
+    </motion.div>
+  );
+};
+
+const DialTick = ({
+  index,
+  fillProgress,
+}: {
+  index: number;
+  fillProgress: MotionValue<number>;
+}) => {
+  const angle = index * 6 * (Math.PI / 180);
+  const isMajor = index % 5 === 0;
+  // Increased radii slightly more for extra inner padding
+  const innerR = isMajor ? 380 : 400;
+  const outerR = 420;
+
+  // Calculate opacity based on scroll progress mapping to angle
+  // Starts from top (index 0) and lights up clockwise
+  const tickProgressThreshold = index / 60;
+  // We map fillProgress [0,1] to opacity [0.1, 1] for each tick
+  const tickOpacity = useTransform(
+    fillProgress,
+    [tickProgressThreshold - 0.1, tickProgressThreshold + 0.1],
+    [0.2, 1],
+  );
+
+  // The last tick in the sequence (index 59) gets the accent color
+  const isLastTick = index === 59;
+
+  return (
+    <motion.line
+      x1={Number((Math.sin(angle) * innerR).toFixed(3))}
+      y1={Number((-Math.cos(angle) * innerR).toFixed(3))}
+      x2={Number((Math.sin(angle) * outerR).toFixed(3))}
+      y2={Number((-Math.cos(angle) * outerR).toFixed(3))}
+      stroke={isLastTick ? "var(--accent, #f97316)" : "currentColor"}
+      strokeWidth={isMajor ? 2 : 1}
+      style={{ opacity: tickOpacity }}
+    />
+  );
+};
+
+const FillBox = ({
+  box,
+  fillProgress,
+}: {
+  box: { text: string; fillAt: number };
+  fillProgress: MotionValue<number>;
+}) => {
+  // Box background goes from dark grey to transparent
+  const boxBg = useTransform(
+    fillProgress,
+    [box.fillAt - 0.05, box.fillAt + 0.05],
+    ["#1a1a1a", "rgba(26,26,26,0)"],
+  );
+  // Text goes from transparent to white
+  const boxTextOp = useTransform(
+    fillProgress,
+    [box.fillAt - 0.05, box.fillAt + 0.05],
+    [0, 1],
+  );
+
+  // Target "ventures." for the accent color
+  const isAccentWord = box.text.includes("ventures");
+
+  return (
+    <motion.div
+      style={{ backgroundColor: boxBg }}
+      className="relative px-[0.15em] rounded-sm border border-transparent overflow-hidden"
+    >
+      {/* Hidden ghost text to maintain box sizing */}
+      <span className="opacity-0 select-none block">{box.text}</span>
+
+      {/* Actual revealing text */}
+      <motion.span
+        style={{
+          opacity: boxTextOp,
+          color: isAccentWord ? "var(--accent, #f97316)" : "inherit",
+        }}
+        className="absolute inset-0 flex items-center justify-center whitespace-nowrap"
+      >
+        {box.text}
+      </motion.span>
+    </motion.div>
+  );
+};
 
 const ExperienceIntro: React.FC<ExperienceIntroProps> = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -210,17 +357,16 @@ const ExperienceIntro: React.FC<ExperienceIntroProps> = () => {
       className="exp relative h-[300vh] overflow-clip transition-colors duration-0"
       data-theme="dynamic"
     >
-      {/* Cinematic Noise Overlay */}
-      <div
-        className="absolute inset-0 pointer-events-none z-50 opacity-[0.035]"
-        style={{
-          position: "fixed", // keep noise fixed during scroll
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-        }}
-      />
-
       {/* Sticky Container holds all the centered action */}
       <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
+        {/* Cinematic Noise Overlay (inside the sticky container so it stays put while scrolling this section) */}
+        <div
+          className="absolute inset-0 pointer-events-none z-50 opacity-[0.035]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          }}
+        />
+
         {/* ========================================== */}
         {/* PHASE 1: TITLE REVEAL & IMAGES             */}
         {/* ========================================== */}
@@ -234,51 +380,17 @@ const ExperienceIntro: React.FC<ExperienceIntroProps> = () => {
         >
           {/* Background Images Reveal */}
           <div className="exp-images hidden lg:block absolute inset-0 pointer-events-none z-0">
-            {images.map((img, idx) => {
-              const isHovered =
-                hoveredIndex !== null && hoveredIndex % images.length === idx;
-              const px = useTransform(springX, (v) => v * img.parallax);
-              const py = useTransform(springY, (v) => v * img.parallax);
-
-              return (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, scale: 0.9, rotate: img.rotation - 5 }}
-                  animate={{
-                    opacity: isHovered ? 1 : 0,
-                    scale: isHovered ? 1 : 0.9,
-                    rotate: isHovered ? img.rotation : img.rotation - 5,
-                    y: isHovered ? 0 : 20,
-                  }}
-                  style={{
-                    top: img.top,
-                    left: img.left,
-                    width: `${(img.width / 1440) * 100}vw`,
-                    maxWidth: "280px",
-                    x: px,
-                    y: py,
-                  }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 100,
-                    damping: 20,
-                    mass: 0.5,
-                  }}
-                  className="aspect-3/4 relative overflow-hidden bg-zinc-900"
-                >
-                  <div className="media-wrapper overflow-hidden rounded-sm shadow-2xl">
-                    <Image
-                      src={img.url}
-                      alt={img.alt}
-                      width={img.width}
-                      height={img.height}
-                      className="media image w-full h-full object-cover scale-110"
-                      priority
-                    />
-                  </div>
-                </motion.div>
-              );
-            })}
+            {images.map((img, idx) => (
+              <FloatingImage
+                key={idx}
+                img={img}
+                isHovered={
+                  hoveredIndex !== null && hoveredIndex % images.length === idx
+                }
+                springX={springX}
+                springY={springY}
+              />
+            ))}
           </div>
 
           <div className="exp-content text-center max-w-[1440px] w-full z-10">
@@ -362,41 +474,9 @@ const ExperienceIntro: React.FC<ExperienceIntroProps> = () => {
               viewBox="-400 -400 800 800"
               className="w-[80vmin] h-[80vmin] max-w-[800px] max-h-[800px]"
             >
-              {Array.from({ length: 60 }).map((_, i) => {
-                const angle = i * 6 * (Math.PI / 180);
-                const isMajor = i % 5 === 0;
-                // Increased radii slightly more for extra inner padding
-                const innerR = isMajor ? 380 : 400;
-                const outerR = 420;
-
-                // Calculate opacity based on scroll progress mapping to angle
-                // Starts from top (index 0) and lights up clockwise
-                const tickProgressThreshold = i / 60;
-                // We map fillProgress [0,1] to opacity [0.1, 1] for each tick
-                const tickOpacity = useTransform(
-                  fillProgress,
-                  [tickProgressThreshold - 0.1, tickProgressThreshold + 0.1],
-                  [0.2, 1],
-                );
-
-                // The last tick in the sequence (index 59) gets the accent color
-                const isLastTick = i === 59;
-
-                return (
-                  <motion.line
-                    key={i}
-                    x1={Number((Math.sin(angle) * innerR).toFixed(3))}
-                    y1={Number((-Math.cos(angle) * innerR).toFixed(3))}
-                    x2={Number((Math.sin(angle) * outerR).toFixed(3))}
-                    y2={Number((-Math.cos(angle) * outerR).toFixed(3))}
-                    stroke={
-                      isLastTick ? "var(--accent, #f97316)" : "currentColor"
-                    }
-                    strokeWidth={isMajor ? 2 : 1}
-                    style={{ opacity: tickOpacity }}
-                  />
-                );
-              })}
+              {Array.from({ length: 60 }).map((_, i) => (
+                <DialTick key={i} index={i} fillProgress={fillProgress} />
+              ))}
             </svg>
           </div>
 
@@ -407,49 +487,9 @@ const ExperienceIntro: React.FC<ExperienceIntroProps> = () => {
                 key={rowIdx}
                 className="flex justify-center flex-wrap gap-[0.25em]"
               >
-                {row.map((box, boxIdx) => {
-                  // Box background goes from dark grey to transparent
-                  const boxBg = useTransform(
-                    fillProgress,
-                    [box.fillAt - 0.05, box.fillAt + 0.05],
-                    ["#1a1a1a", "rgba(26,26,26,0)"],
-                  );
-                  // Text goes from transparent to white
-                  const boxTextOp = useTransform(
-                    fillProgress,
-                    [box.fillAt - 0.05, box.fillAt + 0.05],
-                    [0, 1],
-                  );
-
-                  // Target "ventures." for the accent color
-                  const isAccentWord = box.text.includes("ventures");
-
-                  return (
-                    <motion.div
-                      key={boxIdx}
-                      style={{ backgroundColor: boxBg }}
-                      className="relative px-[0.15em] rounded-sm border border-transparent overflow-hidden"
-                    >
-                      {/* Hidden ghost text to maintain box sizing */}
-                      <span className="opacity-0 select-none block">
-                        {box.text}
-                      </span>
-
-                      {/* Actual revealing text */}
-                      <motion.span
-                        style={{
-                          opacity: boxTextOp,
-                          color: isAccentWord
-                            ? "var(--accent, #f97316)"
-                            : "inherit",
-                        }}
-                        className="absolute inset-0 flex items-center justify-center whitespace-nowrap"
-                      >
-                        {box.text}
-                      </motion.span>
-                    </motion.div>
-                  );
-                })}
+                {row.map((box, boxIdx) => (
+                  <FillBox key={boxIdx} box={box} fillProgress={fillProgress} />
+                ))}
               </div>
             ))}
           </div>

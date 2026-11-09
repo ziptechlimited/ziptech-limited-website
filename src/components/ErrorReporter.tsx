@@ -11,7 +11,7 @@ type ReporterProps = {
 export default function ErrorReporter({ error, reset }: ReporterProps) {
   /* ─ instrumentation shared by every route ─ */
   const lastOverlayMsg = useRef("");
-  const pollRef = useRef<NodeJS.Timeout>();
+  const pollRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   useEffect(() => {
     const inIframe = window.parent !== window;
@@ -104,7 +104,7 @@ export default function ErrorReporter({ error, reset }: ReporterProps) {
               Something went wrong!
             </h1>
             <p className="text-muted-foreground">
-              An unexpected error occurred. Please try again fixing with Orchids
+              An unexpected error occurred. Please refresh the page and try again.
             </p>
           </div>
           <div className="space-y-2">

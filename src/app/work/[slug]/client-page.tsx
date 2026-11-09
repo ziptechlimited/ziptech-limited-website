@@ -44,6 +44,7 @@ const SplitText = ({ text }: { text: string }) => {
 }
 
 export default function ClientProjectDetails({ project }: { project: ProjectData }) {
+  const [impactLead, ...impactRest] = project.impact.split(" and ");
   const containerRef = useRef<HTMLDivElement>(null);
   
   const { scrollYProgress } = useScroll({
@@ -78,7 +79,7 @@ export default function ClientProjectDetails({ project }: { project: ProjectData
 
   return (
     <main ref={containerRef} className="bg-[#f0ebe3] text-[#111] min-h-screen selection:bg-[#00ffff] selection:text-[#111] relative">
-      <Navbar onMenuToggle={() => {}} />
+      <Navbar />
 
       {/* Progress Bar */}
       <motion.div 
@@ -174,12 +175,14 @@ export default function ClientProjectDetails({ project }: { project: ProjectData
                   <p className="text-2xl font-medium leading-tight">{project.role}</p>
                 </div>
               </FadeUp>
-              <FadeUp delay={0.3}>
-                <div className="group">
-                  <p className="text-[10px] uppercase tracking-[0.3em] text-[#111]/40 mb-3 group-hover:text-[#00ffff] transition-colors">Timeline</p>
-                  <p className="text-2xl font-medium leading-tight">{project.timeline}</p>
-                </div>
-              </FadeUp>
+              {project.timeline && (
+                <FadeUp delay={0.3}>
+                  <div className="group">
+                    <p className="text-[10px] uppercase tracking-[0.3em] text-[#111]/40 mb-3 group-hover:text-[#00ffff] transition-colors">Timeline</p>
+                    <p className="text-2xl font-medium leading-tight">{project.timeline}</p>
+                  </div>
+                </FadeUp>
+              )}
               <FadeUp delay={0.4}>
                 <div className="group">
                   <p className="text-[10px] uppercase tracking-[0.3em] text-[#111]/40 mb-3 group-hover:text-[#00ffff] transition-colors">Category</p>
@@ -284,10 +287,10 @@ export default function ClientProjectDetails({ project }: { project: ProjectData
               </div>
               <div className="lg:col-span-9">
                 <h4 className="text-[clamp(1.8rem,6vw,5rem)] leading-none font-medium text-[#00ffff] italic flex flex-col uppercase">
-                   <span className="mb-4">"{project.impact.split(" and ")[0]}"</span>
-                   {project.impact.includes("and") && (
+                   <span className="mb-4">"{impactLead}"</span>
+                   {impactRest.length > 0 && (
                      <span className="text-white/40 text-[0.5em] tracking-tighter not-italic font-light">
-                       & {project.impact.split(" and ")[1]}
+                       & {impactRest.join(" and ")}
                      </span>
                    )}
                 </h4>
@@ -321,7 +324,7 @@ export default function ClientProjectDetails({ project }: { project: ProjectData
                Next Masterpiece
              </motion.span>
              <div className="overflow-hidden py-4 text-center">
-               <h2 className="text-[clamp(3.5rem,10vw,9rem)] leading-[0.85] font-medium text-white transition-all duration-1000 ease-[cubic-bezier(0.16, 1, 0.3, 1)] group-hover:scale-[1.05] uppercase italic">
+               <h2 className="text-[clamp(3.5rem,10vw,9rem)] leading-[0.85] font-medium text-white transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05] uppercase italic">
                  {project.nextProjectTitle}
                </h2>
              </div>

@@ -35,13 +35,13 @@ export async function generateMetadata({
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ziptechlimited.com";
   if (!project) {
     return {
-      title: "Project | Ziptech Limited",
+      title: "Project",
       description: "Explore Ziptech Limited projects.",
       alternates: { canonical: `/work/${slug}` },
     };
   }
   return {
-    title: `${project.title} | Ziptech Limited`,
+    title: project.title,
     description: project.overview,
     alternates: {
       canonical: `/work/${slug}`,

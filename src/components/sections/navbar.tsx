@@ -2,18 +2,18 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import OverlayMenu from "./overlay-menu";
 
-interface NavbarProps {
-  onMenuToggle?: () => void;
-}
-
-const Navbar = ({ onMenuToggle }: NavbarProps) => {
+const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
+    // Pick up the restored scroll position after a reload
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -26,7 +26,8 @@ const Navbar = ({ onMenuToggle }: NavbarProps) => {
   ];
 
   return (
-    <nav 
+    <>
+    <nav
       className="fixed top-0 left-0 w-full z-50 flex items-center justify-center py-6 pointer-events-none mix-blend-difference text-white"
       data-theme="dark"
     >
@@ -93,7 +94,7 @@ const Navbar = ({ onMenuToggle }: NavbarProps) => {
                     className="group relative overflow-hidden h-6 flex flex-col justify-start"
                     aria-label={link.name}
                   >
-                    <div className="transition-transform duration-500 ease-in-out group-hover:-translate-y-full">
+                    <div className="transition-transform duration-500 ease-in-out group-hover:-translate-y-1/2">
                       <span className="block text-[0.875rem] font-medium tracking-wider uppercase leading-6 text-white whitespace-nowrap">
                         {link.name}
                       </span>
@@ -111,7 +112,7 @@ const Navbar = ({ onMenuToggle }: NavbarProps) => {
         {/* Menu Toggle Container */}
         <motion.button 
           layout
-          onClick={onMenuToggle}
+          onClick={() => setMenuOpen(true)}
           className={`group pointer-events-auto relative flex items-center justify-center overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
             isScrolled 
               ? 'h-[46px] w-[54px] md:w-[60px] rounded-2xl bg-white/10 backdrop-blur-md border border-white/20' 
@@ -173,6 +174,8 @@ const Navbar = ({ onMenuToggle }: NavbarProps) => {
         }
       `}</style>
     </nav>
+    <OverlayMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+    </>
   );
 };
 

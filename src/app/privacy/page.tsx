@@ -1,7 +1,7 @@
 import React from "react";
 
 export const metadata = {
-  title: "Privacy Policy | Ziptech Limited",
+  title: "Privacy Policy",
   description: "Read Ziptech Limited’s Privacy Policy covering data collection, usage, and protection.",
   alternates: {
     canonical: "/privacy",

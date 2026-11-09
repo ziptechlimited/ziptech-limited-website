@@ -1,7 +1,7 @@
 import React from "react";
 
 export const metadata = {
-  title: "Terms of Service | Ziptech Limited",
+  title: "Terms of Service",
   description: "Read Ziptech Limited’s Terms of Service governing use of our website and services.",
   alternates: {
     canonical: "/terms",

@@ -54,7 +54,7 @@ export default function AboutClient() {
 
   return (
     <main className="bg-[#f0ebe3] text-[#111] selection:bg-[#00ffff] selection:text-[#111]">
-      <Navbar onMenuToggle={() => {}} />
+      <Navbar />
 
       {/* --- HERO SECTION (Kinetic Text) --- */}
       <section className="h-[120vh] flex items-center justify-center px-[5vw] pt-20">
@@ -99,8 +99,8 @@ export default function AboutClient() {
 
       {/* --- STORY SECTION (Editorial) --- */}
       <section className="py-[180px] px-[5vw]">
-        <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-32 items-center">
-          <div className="lg:col-span-5">
+        <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-16 lg:gap-32 items-center">
+          <div>
             <FadeUp>
                <div className="relative aspect-[3/4] w-full rounded-[3rem] overflow-hidden group">
                   <Image 
@@ -113,7 +113,7 @@ export default function AboutClient() {
                </div>
             </FadeUp>
           </div>
-          <div className="lg:col-span-7">
+          <div>
             <FadeUp delay={0.2}>
               <span className="text-[10px] font-black tracking-[0.5em] uppercase text-[#111]/40 mb-8 block">The Origin</span>
               <h3 className="text-4xl md:text-6xl font-medium uppercase tracking-tight mb-12 leading-none">

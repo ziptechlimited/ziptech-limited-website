@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Navbar from "@/components/sections/navbar";
 import Hero from "@/components/sections/hero";
 import ExperienceIntro from "@/components/sections/experience-intro";
@@ -12,15 +11,11 @@ import FAQSection from "@/components/sections/faq";
 import TeamSection from "@/components/sections/team";
 import CtaSection from "@/components/sections/cta";
 import Footer from "@/components/sections/footer";
-import OverlayMenu from "@/components/sections/overlay-menu";
 
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
   return (
     <>
-      <Navbar onMenuToggle={() => setMenuOpen(true)} />
-      <OverlayMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+      <Navbar />
       <main>
         <Hero />
         <ExperienceIntro />
